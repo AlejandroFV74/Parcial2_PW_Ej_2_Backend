@@ -1,0 +1,16 @@
+{
+  "name": "parcial2_pw_ej_2_backend",
+  "version": "1.0.0",
+  "description": "Repositorio para ejercicio 2 parte de Backend usando Express.js con Api Restful",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Abraham Flores",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.1"
+  }
+}
