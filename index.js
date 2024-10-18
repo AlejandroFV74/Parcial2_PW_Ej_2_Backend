@@ -22,6 +22,18 @@ app.post('/api/users', (req, res) => {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
+     // edad número positivo
+     if (isNaN(age) || age <= 0) {
+        return res.status(400).json({ error: "La edad debe ser un número positivo" });
+    }
+
+    // email formato básico
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ error: "El correo electrónico no es válido" });
+    }
+
+
     const newUser = { name, age, email };
     users.push(newUser);
 
