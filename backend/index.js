@@ -8,6 +8,12 @@ app.use(express.json());
 // version para almacenamiento de usuarios en array
 let users = [];
 
+//mensaje por defecto al acceder a url
+app.get('/', (req, res) => {
+    res.send("Bienvenido a la mejor API de usuarios.");
+});
+
+
 // obtener todos los usuarios
 app.get('/api/users', (req, res) => {
     res.json(users);
@@ -22,9 +28,19 @@ app.post('/api/users', (req, res) => {
         return res.status(400).json({ error: "Todos los campos son obligatorios" });
     }
 
+    //nombre
+    const validNameRegex = /^[A-Za-záéíóúÁÉÍÓÚñÑ\s]+$/;
+        if (!validNameRegex.test(name)) {
+            return res.status(400).json({ error: "Ingrese un nombre válido" });
+        }
+
      // edad número positivo
      if (isNaN(age) || age <= 0) {
         return res.status(400).json({ error: "La edad debe ser un número positivo" });
+    }
+    //edad razonable
+    if (age >= 150){
+        return res.status(400).json({ error: "La edad debe ser realista" });
     }
 
     // email formato básico
@@ -37,7 +53,7 @@ app.post('/api/users', (req, res) => {
     const newUser = { name, age, email };
     users.push(newUser);
 
-    res.status(201).json({ message: "Usuario registrado con éxito", user: newUser });
+    res.status(201).json({ message: "Usuario registrado exitosamente", user: newUser });
 });
 
 // Iniciar servidor
